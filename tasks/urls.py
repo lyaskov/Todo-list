@@ -5,6 +5,7 @@ from tasks.views import (TagsListView, TagCreateView, TagUpdateView,
                          TaskToggleView, TaskUpdateView, TaskDeleteView)
 
 urlpatterns = [
+    path("", TaskListView.as_view(), name="index"),
     path("tags/", TagsListView.as_view(), name="tag-list"),
     path("tags/create", TagCreateView.as_view(), name="tag-create"),
     path("tags/<int:pk>/edit/", TagUpdateView.as_view(), name="tag-edit"),
