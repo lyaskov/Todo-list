@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="row align-items-center mb-3">
+    <div class="col">
+      <h1 class="mb-0">Tags</h1>
+    </div>
+    <div class="col-auto">
+      <a href="{% url 'task:tag-create' %}" class="btn btn-primary">Add Tag</a>
+    </div>
+  </div>
+  <table class="table table-sm align-middle">
+            <thead class="">
+                <tr>
+                    <th>Name</th>
+                    <th>Update</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tag in tags %}
+                <tr>
+                    <td>{{ tag.name }}</td>
+                    <td><a class="btn btn-secondary" href="{% url 'task:tag-edit' tag.pk %}">Update</a></td>
+                    <td><a class="btn btn-secondary" href="{% url 'task:tag-delete' tag.pk %}">Delete</a></td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="3" class="text-center">No tags available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}
