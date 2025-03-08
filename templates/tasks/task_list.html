@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Tags</h1>
+  <a href="{% url 'task:task-create' %}" class="btn btn-primary mb-3">Add
+    Task</a>
+  <table class="table table-sm align-middle">
+    <tbody>
+    {% for task in tasks %}
+      <tr>
+        <td>
+          <div>
+            <strong>{{ task.content }}</strong>
+            <span
+                class="fw-bold {% if task.is_done %}text-success{% else %}text-danger{% endif %}">
+                    {% if task.is_done %}Done{% else %}Not done{% endif %}
+            </span>
+          </div>
+          <p class="mb-1">
+            <small class="text-muted">Created: {{ task.created_at }}</small>
+            {% if task.deadline %}
+              <small class="text-danger">Deadline: {{ task.deadline }}</small>
+            {% endif %}
+          </p>
+          <p class="mb-1">
+            <strong>Tags:</strong>
+            {% for tag in task.tags.all %}
+              <span class="text-muted">{{ tag.name }}</span>
+            {% empty %}
+              <span class="text-muted">No tags</span>
+            {% endfor %}
+            <a href="{% url 'task:task-edit' task.pk %}"
+               class="text-primary me-2">Update</a>
+            <a href="{% url 'task:task-delete' task.pk %}"
+               class="text-primary me-3">Delete</a>
+          </p>
+        </td>
+        <td>
+          <form method="post" action="{% url 'task:task-toggle' task.pk %}" class="ms-auto">
+            {% csrf_token %}
+
+            {% if task.is_done %}
+              <button type="submit" class="btn btn-secondary btn-sm">Undo
+              </button>
+            {% else %}
+              <button type="submit" class="btn btn-success btn-sm">Complete
+              </button>
+            {% endif %}
+
+          </form>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="2" class="text-center">No TODO list available</td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
