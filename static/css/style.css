@@ -27,3 +27,6 @@
 #sidebar .nav-link {
     font-size: 24px;
 }
+label[for="id_is_done"] {
+    font-weight: bold;
+}
