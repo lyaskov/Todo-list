@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Tags</h1>
-  <a href="{% url 'task:tag-create' %}" class="btn btn-primary mb-3">Add Tag</a>
+  <div class="row align-items-center mb-3">
+    <div class="col">
+      <h1 class="mb-0">Tags</h1>
+    </div>
+    <div class="col-auto">
+      <a href="{% url 'task:tag-create' %}" class="btn btn-primary">Add Tag</a>
+    </div>
+  </div>
   <table class="table table-sm align-middle">
             <thead class="">
                 <tr>
